@@ -6,6 +6,7 @@
 <title>Nagar Seva — Community Hero</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:system-ui,-apple-system,sans-serif;overflow:hidden}
@@ -69,7 +70,9 @@ html,body{height:100%;background:var(--bg)}
 /* Every screen scrolls independently */
 .screen{display:none}
 .screen.on{
-  display:block;
+  display:flex;
+  flex-direction:column;
+  flex:1;
   min-height:0;
   animation:fadeInScreen .2s ease;
 }
@@ -223,9 +226,11 @@ hr.div{border:none;border-top:1px solid var(--border);margin:.875rem 0}
 .infobox-t{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
 
 /* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--text3);border-radius:6px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+*{scrollbar-width:thin;scrollbar-color:var(--text3) var(--bg)}
 
 /* ── USER LOCATION PULSE DOT ── */
 @keyframes locpulse{0%{box-shadow:0 0 0 0 rgba(37,99,235,.5)}70%{box-shadow:0 0 0 12px rgba(37,99,235,0)}100%{box-shadow:0 0 0 0 rgba(37,99,235,0)}}
@@ -419,6 +424,66 @@ hr.div{border:none;border-top:1px solid var(--border);margin:.875rem 0}
 .escalation-body{font-size:12px;color:#78350F;line-height:1.6;margin-bottom:12px}
 .escalation-btn{display:flex;align-items:center;gap:6px;padding:9px 14px;background:#D97706;color:#fff;border:none;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;width:100%;justify-content:center;margin-bottom:6px}
 .escalation-btn:hover{opacity:.88}
+
+/* ── RESPONSIVE / MOBILE FIXES ── */
+html,body{-webkit-overflow-scrolling:touch}
+.content{-webkit-overflow-scrolling:touch}
+
+@media (max-width:1024px){
+  .g2{grid-template-columns:1fr}
+  .g3{grid-template-columns:1fr 1fr}
+  .g4{grid-template-columns:1fr 1fr}
+  .metrics{grid-template-columns:1fr 1fr}
+}
+
+@media (max-width:768px){
+  html,body{overflow:hidden}
+  .shell{height:100vh;height:100dvh}
+  .body{flex-direction:column;overflow:hidden}
+  .sidebar{
+    width:100%;
+    height:auto;
+    max-height:none;
+    flex-direction:row;
+    overflow-x:auto;
+    overflow-y:hidden;
+    border-right:none;
+    border-bottom:1px solid var(--border);
+    flex-shrink:0;
+    -webkit-overflow-scrolling:touch;
+  }
+  .s-sec{display:flex;align-items:center;padding:.5rem .5rem;flex-shrink:0}
+  .s-lbl{display:none}
+  .s-item{white-space:nowrap;padding:7px 10px;border-left:none;border-bottom:2px solid transparent}
+  .s-item.on{border-left-color:transparent;border-bottom-color:var(--accent)}
+  .s-div{width:1px;height:20px;margin:0 .4rem;flex-shrink:0}
+  .s-footer{display:none}
+  .main{min-height:0}
+  .content{padding:1rem;-webkit-overflow-scrolling:touch}
+  .ribbon{flex-wrap:wrap;height:auto;min-height:48px;padding:.5rem 1rem}
+  .ribbon-tag{display:none}
+  .ribbon-right{flex-wrap:wrap;gap:4px}
+  .topbar{flex-wrap:wrap;height:auto;min-height:52px;padding:.75rem 1rem;gap:8px}
+  .tb-right{flex-wrap:wrap}
+  .metrics{grid-template-columns:1fr 1fr;gap:8px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .metric-val{font-size:18px}
+  .login-box{width:90%;max-width:340px;padding:2rem 1.5rem}
+  .modal-box{padding:1.5rem 1.25rem}
+  .followup-box{padding:1.25rem}
+}
+
+@media (max-width:480px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .metric{padding:.7rem .8rem}
+  .card{padding:.875rem .9rem}
+  .tb-title{font-size:14px}
+  .action-btn{padding:6px 10px;font-size:11px}
+  .loc-bar{flex-direction:column;align-items:stretch}
+  .loc-btn{justify-content:center}
+  .perm-btns{flex-direction:column}
+  .modal-box{width:94%;padding:1.25rem 1rem}
+}
 </style>
 </head>
 <body class="t-default" id="body">
